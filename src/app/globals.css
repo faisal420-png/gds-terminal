@@ -1,53 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ededed;
+  /* Galileo Blue Palette */
+  --background: #000033; /* Deep Galileo Blue */
+  --foreground: #FFFFFF;
+  --gal-interactive: #00FFFF; /* Cyan for codes */
+  --gal-available: #00FF00;   /* Green for classes */
+  --gal-waitlist: #FFA500;    /* Orange */
 }
 
 @theme {
-  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
+  --font-mono: "Courier New", Courier, monospace;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: none; /* Raw terminal look */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-/* Custom Scrollbar */
+/* Remove all modern decorations */
+* {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: none !important;
+}
+
+/* Galileo Terminal Aesthetics */
+.terminal-container {
+  background-color: var(--background);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.history-line {
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.gal-interactive { color: var(--gal-interactive); }
+.gal-available { color: var(--gal-available); }
+.gal-waitlist { color: var(--gal-waitlist); }
+
+/* Custom Scrollbar (Stealth) */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 10px;
+  background: #1e1e6e;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
-}
-
-/* Animations */
-@keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
+/* Raw Cursor */
 .terminal-cursor {
   display: inline-block;
-  width: 8px;
+  width: 10px;
   height: 18px;
-  background-color: #10b981;
+  background-color: #FFFFFF;
   vertical-align: middle;
-  margin-left: 4px;
-  animation: cursor-blink 1s step-end infinite;
+  margin-left: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }

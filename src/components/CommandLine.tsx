@@ -9,7 +9,6 @@ const CommandLine: React.FC<CommandLineProps> = ({ onExecute }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Focus input on load and keep it focused
     const focusInput = () => inputRef.current?.focus();
     focusInput();
     document.addEventListener('click', focusInput);
@@ -18,24 +17,22 @@ const CommandLine: React.FC<CommandLineProps> = ({ onExecute }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (input.trim()) {
-      onExecute(input);
-      setInput('');
-    }
+    onExecute(input);
+    setInput('');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-2 font-mono">
-      <span className="text-emerald-500 font-bold">{'>'}</span>
+    <form onSubmit={handleSubmit} className="flex items-center gap-1 font-mono">
+      <span className="text-white">{'>'}</span>
       <input
         ref={inputRef}
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        className="flex-1 bg-transparent border-none outline-none text-zinc-100 uppercase tracking-widest placeholder:text-zinc-700"
+        className="flex-1 bg-transparent border-none outline-none text-white uppercase caret-white"
         spellCheck={false}
         autoComplete="off"
-        placeholder="ENTER COMMAND..."
+        autoFocus
       />
     </form>
   );
