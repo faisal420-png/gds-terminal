@@ -8,7 +8,9 @@ export interface ParseResult {
 export const parseCommand = (input: string): ParseResult => {
   const cmd = input.toUpperCase().trim();
 
-  const availabilityRegex = /^A(\d{2}[A-Z]{3})([A-Z]{3})([A-Z]{3})(?:\/([A-Z]{2}))?$/;
+  // Galileo Availability: A[Date][Origin][Destination] or A[Date][Origin][Destination]*[Airline]
+  // Example: A10DECDACSIN or A10DECDACSIN*SQ
+  const availabilityRegex = /^A(\d{2}[A-Z]{3})([A-Z]{3})([A-Z]{3})(?:\*([A-Z0-9]{2}))?$/;
   const match = cmd.match(availabilityRegex);
 
   if (match) {
